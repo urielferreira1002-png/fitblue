@@ -23,11 +23,18 @@
         </header>
 
         <div class="login-card">
-            <form action="index.html">
-                <input type="email" placeholder="E-mail" class="input-field" required>
-                <input type="password" placeholder="Senha" class="input-field" required>
-                <button type="submit" class="btn-entrar w-full mb-6">ENTRAR</button>
-            </form>
+           <form onsubmit="event.preventDefault(); window.location.href='home.html'">
+    <input type="email" placeholder="E-mail" class="input-field" required>
+    <input type="password" placeholder="Senha" class="input-field" required>
+    <button type="submit" class="btn-entrar w-full mb-6">ENTRAR</button>
+</form>
+
+<script>
+  function handleCredentialResponse(response) {
+    // Quando o Google logar, ele te joga para a HOME
+    window.location.href = "home.html";
+  }
+</script>
 
             <div class="relative flex items-center justify-center mb-6">
                 <div class="border-t border-gray-800 w-full"></div>
@@ -67,3 +74,4 @@
 
 
 </html>
+
