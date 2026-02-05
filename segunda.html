@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino | FITBLUE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: white; font-family: sans-serif; }
+        .ex-card { background: #111; border-left: 4px solid #1e40af; border-radius: 1rem; padding: 20px; margin-bottom: 15px; }
+        .timer-display { font-size: 2.5rem; font-weight: 900; color: #3b82f6; text-align: center; margin: 10px 0; font-variant-numeric: tabular-nums; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .btn { padding: 12px; border-radius: 8px; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; transition: 0.2s; }
+        .btn-start { background: #1e40af; grid-column: span 2; }
+        .btn-pause { background: #374151; }
+        .btn-reset { background: #7f1d1d; }
+    </style>
+</head>
+<body>
+    <nav class="p-6 flex justify-between items-center border-b border-gray-800">
+        <h1 class="text-xl font-black text-blue-500 italic uppercase">FITBLUE <span class="text-white">TREINO</span></h1>
+        <a href="meus-treinos.html" class="text-xs font-bold text-gray-500 uppercase">← Voltar</a>
+    </nav>
+    <main class="max-w-2xl mx-auto p-6" id="container"></main>
+
+    <script src="timer-logic.js"></script>
+    <script>
+        // --- COPIE A LISTA DE TREINOS ABAIXO PARA CADA DIA ---
+        const treinos = [
+            { id: 's1', nome: 'AQUECIMENTO', tempo: 300 },
+            { id: 's2', nome: 'AGACHAMENTO', tempo: 300 },
+            { id: 's3', nome: 'AGACHAMENTO SUMÔ', tempo: 300 },
+            { id: 's4', nome: 'AVANÇO ALTERNADO', tempo: 300 },
+            { id: 's5', nome: 'PANTURRILHA', tempo: 300 },
+            { id: 's6', nome: 'ISOMETRIA', tempo: 300 },
+            { id: 's7', nome: 'ALONGAMENTO', tempo: 300 }
+        ];
+        renderCards(treinos);
+    </script>
+</body>
+</html>

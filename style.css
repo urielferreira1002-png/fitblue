@@ -1,0 +1,79 @@
+/* Configurações Globais */
+:root {
+    --primary-blue: #3b82f6;
+    --dark-blue: #1e40af;
+    --bg-black: #050505;
+    --card-gray: #121212;
+    --neon-glow: 0 0 15px rgba(59, 130, 246, 0.5);
+}
+
+body {
+    background-color: var(--bg-black);
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+}
+
+/* Estilização dos Cards */
+.workout-card {
+    background-color: var(--card-gray);
+    border: 1px solid #262626;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.workout-card:hover {
+    border-color: var(--primary-blue);
+    box-shadow: var(--neon-glow);
+    transform: translateY(-5px);
+}
+
+/* Botão Estilo Neon */
+.btn-primary {
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--neon-glow);
+    transition: transform 0.2s active;
+}
+
+.btn-primary:active {
+    transform: scale(0.95);
+}
+
+/* Timer e Progresso */
+#progress-circle {
+    transition: stroke-dashoffset 1s linear;
+    stroke: var(--primary-blue);
+    filter: drop-shadow(0 0 5px var(--primary-blue));
+}
+
+.timer-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 4rem;
+    color: var(--primary-blue);
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+}
+
+/* Scrollbar Customizada (Preto e Azul) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--dark-blue);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-blue);
+}

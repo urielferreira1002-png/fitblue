@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Fit Blue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <style>
+        body { background-color: #050505; color: white; font-family: sans-serif; }
+        .brand-name { color: #3b82f6; font-weight: 900; font-size: 2.2rem; letter-spacing: -1px; text-transform: uppercase; font-style: italic; }
+        .brand-white { color: white; }
+        .login-card { background-color: #111111; border: 1px solid #1e40af; border-radius: 2.5rem; padding: 40px; }
+        .btn-entrar { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; width: 100%; padding: 14px; border-radius: 12px; font-weight: 800; text-transform: uppercase; }
+        .input-field { background-color: #0a0a0a; border: 1px solid #1e40af; border-radius: 10px; padding: 14px; width: 100%; color: white; margin-bottom: 15px; outline: none; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-6">
+    <div class="max-w-sm w-full">
+        <header class="text-center mb-10">
+            <div class="brand-name">FIT<span class="brand-white">BLUE</span></div>
+            <p class="text-gray-500 text-[10px] uppercase font-bold tracking-widest mt-1">Sua evolução começa aqui</p>
+        </header>
+
+        <div class="login-card">
+            <form action="index.html">
+                <input type="email" placeholder="E-mail" class="input-field" required>
+                <input type="password" placeholder="Senha" class="input-field" required>
+                <button type="submit" class="btn-entrar w-full mb-6">ENTRAR</button>
+            </form>
+
+            <div class="relative flex items-center justify-center mb-6">
+                <div class="border-t border-gray-800 w-full"></div>
+                <span class="bg-[#111111] px-3 text-gray-600 text-[10px] uppercase font-bold absolute">OU</span>
+            </div>
+
+            <div id="g_id_onload"
+                 data-client_id="9402418916-2j8ai25dpr5cucdfmslp5brgdkjkf53v.apps.googleusercontent.com"
+                 data-context="signin"
+                 data-ux_mode="popup"
+                 data-callback="handleCredentialResponse"
+                 data-auto_prompt="false">
+            </div>
+
+            <div class="g_id_signin" 
+                 data-type="standard" 
+                 data-shape="pill" 
+                 data-theme="filled_blue" 
+                 data-text="signin_with" 
+                 data-size="large" 
+                 data-width="310">
+            </div>
+        </div>
+
+        <p class="text-center text-gray-500 text-xs mt-8">
+            Não tem conta? <a href="cadastro.html" class="text-blue-500 font-bold">Cadastre-se</a>
+        </p>
+    </div>
+
+    <script>
+      function handleCredentialResponse(response) {
+        // Redireciona para a index.html após o sucesso do login no Google
+        window.location.href = "index.html";
+      }
+    </script>
+</body>
+
+</html>

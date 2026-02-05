@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quarta: Abdômen | FITBLUE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: white; font-family: sans-serif; }
+        /* Cards GG: Maiores e com mais destaque */
+        .ex-card { 
+            background: #111; 
+            border-left: 6px solid #1e40af; 
+            border-radius: 1.5rem; 
+            padding: 40px; 
+            margin-bottom: 25px; 
+        }
+        .timer-display { 
+            font-size: 4.5rem; /* Tempo gigante para ver de longe */
+            font-weight: 900; 
+            color: #3b82f6; 
+            text-align: center; 
+            margin: 20px 0; 
+            font-variant-numeric: tabular-nums;
+        }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn { 
+            padding: 20px; 
+            border-radius: 1rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            font-size: 1rem; 
+            transition: 0.2s; 
+        }
+        .btn-start { background: #1e40af; grid-column: span 2; }
+        .btn-pause { background: #374151; }
+        .btn-reset { background: #7f1d1d; }
+        .btn:active { transform: scale(0.95); }
+    </style>
+</head>
+<body>
+    <nav class="p-8 flex justify-between items-center border-b border-gray-800">
+        <div>
+            <h1 class="text-2xl font-black text-blue-500 italic uppercase">QUARTA <span class="text-white">ABDÔMEN</span></h1>
+            <p class="text-gray-500 text-xs font-bold uppercase">Meta: 30 Minutos Total</p>
+        </div>
+        <a href="meus-treinos.html" class="text-sm font-bold text-gray-400 uppercase border-b border-gray-700 pb-1">← Voltar</a>
+    </nav>
+
+    <main class="max-w-3xl mx-auto p-6" id="container">
+        </main>
+
+    <script>
+        // Lista de exercícios de quarta com 5 minutos cada (300 segundos)
+        const treinos = [
+            { id: 'q1', nome: 'AQUECIMENTO LEVE', tempo: 300 },
+            { id: 'q2', nome: 'ABDOMINAL TRADICIONAL', tempo: 300 },
+            { id: 'q3', nome: 'ABDOMINAL BICICLETA', tempo: 300 },
+            { id: 'q4', nome: 'ELEVAÇÃO DE PERNAS', tempo: 300 },
+            { id: 'q5', nome: 'PRANCHA', tempo: 300 },
+            { id: 'q6', nome: 'ALONGAMENTO ABDOMINAL', tempo: 300 }
+        ];
+
+        const timers = {};
+
+        function renderCards() {
+            const container = document.getElementById('container');
+            treinos.forEach(ex => {
+                container.innerHTML += `
+                    <div class="ex-card">
+                        <h3 class="font-black italic uppercase text-xl text-blue-400">${ex.nome}</h3>
+                        <div class="timer-display" id="display-${ex.id}">${formatTime(ex.tempo)}</div>
+                        <div class="controls">
+                            <button class="btn btn-start" onclick="startTimer('${ex.id}', ${ex.tempo})">Iniciar Treino</button>
+                            <button class="btn btn-pause" onclick="pauseTimer('${ex.id}')">Pausar</button>
+                            <button class="btn btn-reset" onclick="resetTimer('${ex.id}', ${ex.tempo})">Reiniciar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function formatTime(s) {
+            const min = Math.floor(s / 60);
+            const seg = s % 60;
+            return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer(id, total) {
+            if (timers[id]?.interval) return;
+            if (!timers[id]) timers[id] = { time: total };
+
+            timers[id].interval = setInterval(() => {
+                if (timers[id].time > 0) {
+                    timers[id].time--;
+                    document.getElementById(`display-${id}`).innerText = formatTime(timers[id].time);
+                } else {
+                    clearInterval(timers[id].interval);
+                    document.getElementById(`display-${id}`).innerText = "CONCLUÍDO! ✅";
+                    document.getElementById(`display-${id}`).style.color = "#059669";
+                }
+            }, 1000);
+        }
+
+        function pauseTimer(id) {
+            clearInterval(timers[id]?.interval);
+            if(timers[id]) delete timers[id].interval;
+        }
+
+        function resetTimer(id, total) {
+            pauseTimer(id);
+            timers[id] = { time: total };
+            const display = document.getElementById(`display-${id}`);
+            display.innerText = formatTime(total);
+            display.style.color = "#3b82f6";
+        }
+
+        renderCards();
+    </script>
+</body>
+</html>

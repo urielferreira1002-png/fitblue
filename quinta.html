@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quinta: Cardio | FITBLUE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: white; font-family: sans-serif; }
+        .ex-card { 
+            background: #111; 
+            border-left: 6px solid #dc2626; /* Vermelho para Cardio */
+            border-radius: 1.5rem; 
+            padding: 40px; 
+            margin-bottom: 25px; 
+        }
+        .timer-display { 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            color: #ef4444; 
+            text-align: center; 
+            margin: 20px 0; 
+            font-variant-numeric: tabular-nums;
+        }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .btn { 
+            padding: 20px; 
+            border-radius: 1rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+            font-size: 1rem; 
+        }
+        .btn-start { background: #dc2626; grid-column: span 2; }
+        .btn-pause { background: #374151; }
+        .btn-reset { background: #7f1d1d; }
+    </style>
+</head>
+<body>
+    <nav class="p-8 flex justify-between items-center border-b border-gray-800">
+        <div>
+            <h1 class="text-2xl font-black text-red-600 italic uppercase">QUINTA <span class="text-white">CARDIO</span></h1>
+            <p class="text-gray-500 text-xs font-bold uppercase">Meta: 40 Minutos</p>
+        </div>
+        <a href="meus-treinos.html" class="text-sm font-bold text-gray-400 uppercase">← Voltar</a>
+    </nav>
+
+    <main class="max-w-3xl mx-auto p-6" id="container"></main>
+
+    <script>
+        // Tempos exatos: 5 min (300s), 7 min (420s), 2 min (120s)
+        const treinos = [
+            { id: 'qui1', nome: 'AQUECIMENTO (CORRIDA LEVE)', tempo: 300 },
+            { id: 'qui2', nome: 'POLICHINELO', tempo: 420 },
+            { id: 'qui3', nome: 'CORRIDA PARADA', tempo: 420 },
+            { id: 'qui4', nome: 'SKIPPING (JOELHO ALTO)', tempo: 420 },
+            { id: 'qui5', nome: 'ESCALADOR', tempo: 420 },
+            { id: 'qui6', nome: 'BURPEE LEVE', tempo: 300 },
+            { id: 'qui7', nome: 'ALONGAMENTO GERAL', tempo: 120 }
+        ];
+
+        const timers = {};
+
+        function renderCards() {
+            const container = document.getElementById('container');
+            treinos.forEach(ex => {
+                container.innerHTML += `
+                    <div class="ex-card">
+                        <h3 class="font-black italic uppercase text-xl text-red-500">${ex.nome}</h3>
+                        <div class="timer-display" id="display-${ex.id}">${formatTime(ex.tempo)}</div>
+                        <div class="controls">
+                            <button class="btn btn-start" onclick="startTimer('${ex.id}', ${ex.tempo})">Iniciar</button>
+                            <button class="btn btn-pause" onclick="pauseTimer('${ex.id}')">Pausar</button>
+                            <button class="btn btn-reset" onclick="resetTimer('${ex.id}', ${ex.tempo})">Reiniciar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function formatTime(s) {
+            const min = Math.floor(s / 60);
+            const seg = s % 60;
+            return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer(id, total) {
+            if (timers[id]?.interval) return;
+            if (!timers[id]) timers[id] = { time: total };
+            timers[id].interval = setInterval(() => {
+                if (timers[id].time > 0) {
+                    timers[id].time--;
+                    document.getElementById(`display-${id}`).innerText = formatTime(timers[id].time);
+                } else {
+                    clearInterval(timers[id].interval);
+                    document.getElementById(`display-${id}`).innerText = "CONCLUÍDO! 🔥";
+                }
+            }, 1000);
+        }
+
+        function pauseTimer(id) {
+            clearInterval(timers[id]?.interval);
+            if(timers[id]) delete timers[id].interval;
+        }
+
+        function resetTimer(id, total) {
+            pauseTimer(id);
+            timers[id] = { time: total };
+            document.getElementById(`display-${id}`).innerText = formatTime(total);
+        }
+
+        renderCards();
+    </script>
+</body>
+</html>

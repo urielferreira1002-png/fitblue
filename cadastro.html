@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Fit Blue</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: white; font-family: sans-serif; }
+        .brand-name { font-weight: 900; font-size: 2.2rem; letter-spacing: -1px; text-transform: uppercase; font-style: italic; }
+        .fit { color: #3b82f6; }
+        .blue { color: white; }
+        .login-card { background-color: #111111; border: 1px solid #1e40af; border-radius: 2.5rem; padding: 40px; }
+        .btn-acao { background: linear-gradient(to right, #1e40af, #3b82f6); color: white; width: 100%; padding: 14px; border-radius: 1rem; font-weight: 800; text-transform: uppercase; box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3); }
+        .input-dark { background-color: #0a0a0a; border: 1px solid #1e40af; border-radius: 0.8rem; padding: 14px; width: 100%; color: white; margin-bottom: 15px; outline: none; }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen px-6">
+    <div class="max-w-sm w-full">
+        <header class="text-center mb-10">
+            <div class="brand-name"><span class="fit">FIT</span><span class="blue">BLUE</span></div>
+            <p class="text-gray-500 text-[10px] font-bold uppercase tracking-[0.3em] mt-1">Crie sua conta gratuita</p>
+        </header>
+        <div class="login-card">
+            <form action="index.html">
+                <input type="text" placeholder="Nome Completo" class="input-dark" required>
+                <input type="email" placeholder="E-mail" class="input-dark" required>
+                <input type="password" placeholder="Criar Senha" class="input-dark" required>
+                <button type="submit" class="btn-acao mt-4">Cadastrar</button>
+            </form>
+        </div>
+        <div class="text-center mt-8">
+            <p class="text-gray-500 text-xs font-medium">Já tem uma conta? <a href="login.html" class="text-blue-500 font-black">Fazer Login</a></p>
+        </div>
+    </div>
+</body>
+</html>

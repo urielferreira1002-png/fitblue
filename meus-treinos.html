@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meus Treinos | FITBLUE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: white; font-family: sans-serif; }
+        /* Cards maiores com mais preenchimento */
+        .day-card { 
+            background: #111; 
+            border-left: 6px solid #1e40af; 
+            border-radius: 1.5rem; 
+            padding: 40px; /* Aumentado para dar mais volume */
+            margin-bottom: 25px; 
+            transition: 0.3s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .day-card:hover { background: #1a1a1a; transform: scale(1.02); }
+    </style>
+</head>
+<body>
+    <nav class="p-10 border-b border-gray-800">
+        <h1 class="text-4xl font-black text-blue-500 italic uppercase text-center">MEUS <span class="text-white">TREINOS</span></h1>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-8">
+        <a href="segunda.html" class="day-card">
+            <div>
+                <h3 class="font-black italic text-3xl uppercase">Segunda-feira</h3>
+                <p class="text-blue-500 text-lg font-bold uppercase mt-2">🔥 Pernas (35 min)</p>
+            </div>
+            <span class="text-3xl text-blue-600">➔</span>
+        </a>
+
+        <a href="terca.html" class="day-card">
+            <div>
+                <h3 class="font-black italic text-3xl uppercase">Terça-feira</h3>
+                <p class="text-blue-500 text-lg font-bold uppercase mt-2">💪 Braços e Peito (35 min)</p>
+            </div>
+            <span class="text-3xl text-blue-600">➔</span>
+        </a>
+
+        <a href="quarta.html" class="day-card">
+            <div>
+                <h3 class="font-black italic text-3xl uppercase">Quarta-feira</h3>
+                <p class="text-blue-500 text-lg font-bold uppercase mt-2">🧱 Abdômen (30 min)</p>
+            </div>
+            <span class="text-3xl text-blue-600">➔</span>
+        </a>
+
+        <a href="quinta.html" class="day-card">
+            <div>
+                <h3 class="font-black italic text-3xl uppercase">Quinta-feira</h3>
+                <p class="text-blue-500 text-lg font-bold uppercase mt-2">🏃 Cardio (40 min)</p>
+            </div>
+            <span class="text-3xl text-blue-600">➔</span>
+        </a>
+
+        <a href="sexta.html" class="day-card">
+            <div>
+                <h3 class="font-black italic text-3xl uppercase">Sexta-feira</h3>
+                <p class="text-blue-500 text-lg font-bold uppercase mt-2">⚡ Corpo Todo (35 min)</p>
+            </div>
+            <span class="text-3xl text-blue-600">➔</span>
+        </a>
+
+        <div class="mt-12 text-center">
+            <a href="index.html" class="text-gray-500 text-sm font-bold uppercase hover:text-white transition underline tracking-widest">Voltar para o Início</a>
+        </div>
+    </main>
+</body>
+</html>

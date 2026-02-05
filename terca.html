@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terça: Braços e Peito | FITBLUE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background: #050505; color: white; font-family: sans-serif; }
+        .ex-card { background: #111; border-left: 4px solid #1e40af; border-radius: 1rem; padding: 20px; margin-bottom: 15px; }
+        .timer-display { font-size: 2.5rem; font-weight: 900; color: #3b82f6; text-align: center; margin: 10px 0; font-variant-numeric: tabular-nums; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .btn { padding: 12px; border-radius: 8px; font-weight: bold; text-transform: uppercase; font-size: 0.75rem; transition: 0.2s; }
+        .btn-start { background: #1e40af; grid-column: span 2; }
+        .btn-pause { background: #374151; }
+        .btn-reset { background: #7f1d1d; }
+    </style>
+</head>
+<body>
+    <nav class="p-6 flex justify-between items-center border-b border-gray-800">
+        <div class="flex items-center gap-2">
+            <h1 class="text-xl font-black text-blue-500 italic uppercase">TERÇA <span class="text-white text-sm">BRAÇOS E PEITO (35 MIN)</span></h1>
+        </div>
+        <a href="meus-treinos.html" class="text-xs font-bold text-gray-500 uppercase">← Voltar</a>
+    </nav>
+
+    <main class="max-w-2xl mx-auto p-6" id="container"></main>
+
+    <script>
+        const treinos = [
+            { id: 't1', nome: 'AQUECIMENTO (ROTAÇÕES)', tempo: 300 }, // 5 min
+            { id: 't2', nome: 'FLEXÃO TRADICIONAL', tempo: 420 },      // 7 min
+            { id: 't3', nome: 'FLEXÃO JOELHO NO CHÃO', tempo: 300 }, // 5 min
+            { id: 't4', nome: 'FLEXÃO FECHADA', tempo: 360 },        // 6 min
+            { id: 't5', nome: 'MERGULHO NO BANCO', tempo: 420 },      // 7 min
+            { id: 't6', nome: 'ALONGAMENTO', tempo: 300 }            // 5 min
+        ];
+
+        const timers = {};
+
+        function renderCards() {
+            const container = document.getElementById('container');
+            treinos.forEach(ex => {
+                container.innerHTML += `
+                    <div class="ex-card">
+                        <h3 class="font-black italic uppercase text-sm">${ex.nome}</h3>
+                        <div class="timer-display" id="display-${ex.id}">${formatTime(ex.tempo)}</div>
+                        <div class="controls">
+                            <button class="btn btn-start" onclick="startTimer('${ex.id}', ${ex.tempo})">Iniciar / Continuar</button>
+                            <button class="btn btn-pause" onclick="pauseTimer('${ex.id}')">Pausar</button>
+                            <button class="btn btn-reset" onclick="resetTimer('${ex.id}', ${ex.tempo})">Reiniciar</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function formatTime(s) {
+            const min = Math.floor(s / 60);
+            const seg = s % 60;
+            return `${min.toString().padStart(2, '0')}:${seg.toString().padStart(2, '0')}`;
+        }
+
+        function startTimer(id, total) {
+            if (timers[id]?.interval) return;
+            if (!timers[id]) timers[id] = { time: total };
+
+            timers[id].interval = setInterval(() => {
+                if (timers[id].time > 0) {
+                    timers[id].time--;
+                    document.getElementById(`display-${id}`).innerText = formatTime(timers[id].time);
+                } else {
+                    clearInterval(timers[id].interval);
+                    document.getElementById(`display-${id}`).innerText = "CONCLUÍDO! ✅";
+                    document.getElementById(`display-${id}`).style.color = "#059669";
+                }
+            }, 1000);
+        }
+
+        function pauseTimer(id) {
+            clearInterval(timers[id]?.interval);
+            if(timers[id]) delete timers[id].interval;
+        }
+
+        function resetTimer(id, total) {
+            pauseTimer(id);
+            timers[id] = { time: total };
+            const display = document.getElementById(`display-${id}`);
+            display.innerText = formatTime(total);
+            display.style.color = "#3b82f6";
+        }
+
+        renderCards();
+    </script>
+</body>
+</html>

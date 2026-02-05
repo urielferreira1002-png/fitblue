@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fit Blue | costas e bíceps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #050505; color: white; font-family: sans-serif; }
+        .logo-box { display: flex; flex-direction: column; align-items: center; padding: 15px; }
+        .brand-name { color: #3b82f6; font-weight: 900; font-size: 1.8rem; letter-spacing: -1px; text-transform: uppercase; }
+        
+        .exercise-card { background-color: #111111; border: 1px solid #1e40af; border-radius: 2rem; margin-bottom: 1.2rem; padding: 20px; }
+        .timer-display { font-family: monospace; font-size: 2rem; color: #3b82f6; font-weight: bold; }
+        
+        .btn-container { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-descanso { background-color: #1e40af; color: white; flex: 2; padding: 12px; border-radius: 12px; font-weight: 800; text-transform: uppercase; transition: 0.2s; font-size: 0.7rem; }
+        .btn-reset { background-color: #374151; color: white; flex: 1; padding: 12px; border-radius: 12px; font-weight: 800; text-transform: uppercase; transition: 0.2s; font-size: 0.7rem; }
+        
+        .btn-descanso.pausado { background-color: #d97706; }
+        .btn-descanso:active, .btn-reset:active { transform: scale(0.95); }
+    </style>
+</head>
+<body class="max-w-md mx-auto pb-10 px-6">
+
+    <header class="logo-box">
+        <div class="brand-name italic">FIT BLUE</div>
+    </header>
+
+    <div class="flex items-center mb-4">
+        <a href="index.html" class="bg-gray-800 hover:bg-gray-700 text-white px-5 py-2 rounded-full text-[10px] font-bold transition-colors">
+            ← VOLTAR
+        </a>
+    </div>
+
+    <div class="mb-6">
+        <h1 class="text-4xl font-black italic text-blue-600 uppercase tracking-tighter leading-none">COSTAS E Bíceps</h1>
+        <p class="text-gray-400 text-xs font-bold uppercase mt-1">Costas + Bíceps (45–60 min)</p>
+    </div>
+
+    <div class="bg-blue-900/10 border border-blue-900/30 rounded-2xl p-4 mb-6 text-xs">
+        <p class="text-blue-500 font-bold uppercase mb-2">◆ AQUECIMENTO (5 MIN)</p>
+        <p class="text-gray-400">• Polichinelo ou corda – 2 min</p>
+        <p class="text-gray-400">• Rotação de ombros + braços – 3 min</p>
+    </div>
+
+    <h2 class="text-white font-black uppercase text-sm mb-4 tracking-widest border-l-4 border-blue-600 pl-2">COSTAS</h2>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Barra Fixa</h3><p class="text-[10px] text-gray-500">3 SÉRIES • 90S</p></div>
+            <div id="t1" class="timer-display text-right">01:30</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt1" onclick="toggleTimer(90, 't1', 'bt1')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(90, 't1', 'bt1')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Puxada Frente</h3><p class="text-[10px] text-gray-500">3X 10–12 • 60S</p></div>
+            <div id="t2" class="timer-display text-right">01:00</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt2" onclick="toggleTimer(60, 't2', 'bt2')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(60, 't2', 'bt2')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Remada Curvada</h3><p class="text-[10px] text-gray-500">3X 8–10 • 90S</p></div>
+            <div id="t3" class="timer-display text-right">01:30</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt3" onclick="toggleTimer(90, 't3', 'bt3')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(90, 't3', 'bt3')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Remada Unilateral</h3><p class="text-[10px] text-gray-500">3X 10 CADA LADO • 60S</p></div>
+            <div id="t4" class="timer-display text-right">01:00</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt4" onclick="toggleTimer(60, 't4', 'bt4')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(60, 't4', 'bt4')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <h2 class="text-white font-black uppercase text-sm mt-10 mb-4 tracking-widest border-l-4 border-blue-600 pl-2">BÍCEPS</h2>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Rosca Direta</h3><p class="text-[10px] text-gray-500">3X 8–10 • 60S</p></div>
+            <div id="t5" class="timer-display text-right">01:00</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt5" onclick="toggleTimer(60, 't5', 'bt5')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(60, 't5', 'bt5')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Rosca Alternada</h3><p class="text-[10px] text-gray-500">3X 10 • 60S</p></div>
+            <div id="t6" class="timer-display text-right">01:00</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt6" onclick="toggleTimer(60, 't6', 'bt6')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(60, 't6', 'bt6')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="exercise-card">
+        <div class="flex justify-between items-center">
+            <div><h3 class="font-bold text-lg leading-tight">Rosca Martelo</h3><p class="text-[10px] text-gray-500">3X 12 • 60S</p></div>
+            <div id="t7" class="timer-display text-right">01:00</div>
+        </div>
+        <div class="btn-container">
+            <button id="bt7" onclick="toggleTimer(60, 't7', 'bt7')" class="btn-descanso">Iniciar Descanso</button>
+            <button onclick="resetTimer(60, 't7', 'bt7')" class="btn-reset">Reset</button>
+        </div>
+    </div>
+
+    <div class="mt-8 p-6 bg-gray-900/50 rounded-3xl text-center border border-gray-800">
+        <p class="text-blue-500 font-bold text-[10px] uppercase mb-1">🔹 FINALIZAÇÃO (5 MIN)</p>
+        <p class="text-xs text-gray-400 mb-3">Alongamento de costas e braços – 5 min</p>
+        <p class="text-xs text-blue-400 italic">"Porque sair duro igual robô não é estilo."</p>
+    </div>
+
+    <script>
+        let estados = {};
+        function formatar(s) {
+            let m = Math.floor(s / 60);
+            let seg = s % 60;
+            return `${String(m).padStart(2, '0')}:${String(seg).padStart(2, '0')}`;
+        }
+        function toggleTimer(tempoInicial, displayId, btnId) {
+            const btn = document.getElementById(btnId);
+            const display = document.getElementById(displayId);
+            if (!estados[displayId]) estados[displayId] = { tempo: tempoInicial, intervalo: null, rodando: false };
+            let e = estados[displayId];
+            if (e.rodando) {
+                clearInterval(e.intervalo);
+                e.rodando = false;
+                btn.innerText = "CONTINUAR";
+                btn.classList.add("pausado");
+            } else {
+                e.rodando = true;
+                btn.innerText = "PAUSAR";
+                btn.classList.remove("pausado");
+                e.intervalo = setInterval(() => {
+                    e.tempo--;
+                    display.innerText = formatar(e.tempo);
+                    if (e.tempo <= 0) {
+                        clearInterval(e.intervalo);
+                        alert("Descanso Finalizado!");
+                        resetTimer(tempoInicial, displayId, btnId);
+                    }
+                }, 1000);
+            }
+        }
+        function resetTimer(tempoInicial, displayId, btnId) {
+            const btn = document.getElementById(btnId);
+            const display = document.getElementById(displayId);
+            if (estados[displayId]) clearInterval(estados[displayId].intervalo);
+            estados[displayId] = { tempo: tempoInicial, intervalo: null, rodando: false };
+            display.innerText = formatar(tempoInicial);
+            btn.innerText = "INICIAR DESCANSO";
+            btn.classList.remove("pausado");
+        }
+    </script>
+</body>
+</html><div class="flex items-center mb-6">
+    <a href="index.html" class="bg-gray-800 text-white px-5 py-2 rounded-full text-[10px] font-bold">← VOLTAR AO MENU</a>
+</div>
